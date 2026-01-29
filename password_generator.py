@@ -24,7 +24,7 @@ def generate_password(n_letters: int, n_symbols: int, n_numbers: int) -> str:
     chars += [secrets.choice(SYMBOLS) for _ in range(n_symbols)]
     chars += [secrets.choice(DIGITS) for _ in range(n_numbers)]
 
-    secrets.SystemRandom().shuffle(chars)  # shuffle so placement isn't predictable
+    secrets.SystemRandom().shuffle(chars) 
     return "".join(chars)
 
 if __name__ == "__main__":
