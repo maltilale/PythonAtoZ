@@ -23,28 +23,67 @@
 # paper vs scissor-> scissor wins.
 
 import random
+from typing import NoReturn
 
-def play_game():
-    choices = ["rock", "paper", "scissors"]
-    user_input = input(f"Enter choice ({', '.join(choices)}): ").strip().lower()
+OPTIONS = ["r", "p", "s"]
+LABELS = {"r": "rock", "p": "paper", "s": "scissors"}
 
-    if user_input not in choices:
-        print("Invalid entry!")
-        return
+def get_user_choice(prompt: str) -> str:
+    while True:
+        response = input(prompt).strip().lower()
+        if response in OPTIONS:
+            return response
+        else:
+            print("Invalid choice! Please select only one option from "
+            f"{', '.join(opt.upper() for opt in OPTIONS)}")
 
-    user_idx = choices.index(user_input)
-    comp_idx = random.randint(0, 2)
-    
-    print(f"You chose {choices[user_idx]}, computer chose {choices[comp_idx]}.")
+def get_yes_no_input(prompt: str) -> bool:
+    while True:
+        response = input(prompt).strip().lower()
+        if response in ("y", "yes"):
+            return True
+        elif response in ("n", "no"):
+            return False
+        print("Please enter 'Y' or 'N'.")
 
-    result = (user_idx - comp_idx) % 3
+def play_game() -> None:
+    computer_choice = random.choice(OPTIONS)
+    print(
+        f"Decide an option between"
+        f" Rock({OPTIONS[0]}), Paper({OPTIONS[1]}), Scissors({OPTIONS[2]})!"
+    )
+    user_choice = get_user_choice(f"Please enter only 1 option from {", ".join(opt.upper() for opt in OPTIONS)}: ")
+
+    user_choice_idx = OPTIONS.index(user_choice)
+    computer_choice_idx = OPTIONS.index(computer_choice)
+
+    print(f"You chose {LABELS[user_choice]}, computer chose {LABELS[computer_choice]}.")
+
+    result = (user_choice_idx - computer_choice_idx) % 3
 
     if result == 0:
         print("Game Draw!!")
     elif result == 1:
-        print("You win!!")
+        print("Yay! You win!!")
     else:
-        print("Computer wins!!")
+        print("Oops! Computer wins!!")
+
+def main() -> NoReturn:
+    print(f"-" * 60)
+    print("Welcome to the Rock - Paper - Scissor game!")
+    print(f"-" * 60)
+
+    try:
+        while True:
+            play_game()
+            play_again = get_yes_no_input("\nPlay again? (Y/N): ")
+            if not play_again:
+                print("Thanks for playing!")
+                break
+    except (KeyboardInterrupt, EOFError):
+        print("Thanks for playing!")
+    
+    raise SystemExit(0)
 
 if __name__ == "__main__":
-    play_game()
+    main()

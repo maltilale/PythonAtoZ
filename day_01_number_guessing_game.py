@@ -9,7 +9,7 @@
 # Feedback on the guess accuracy.
 # Example: "Too high! Try again."
 
-# Final success message: "Congratulations! You guessed the number 42 in 5 attempts."
+# Final success message: "Congratulations! You won in 5 attempts."
 import random
 from typing import NoReturn
 
@@ -56,7 +56,7 @@ def play_game() -> None:
             print(f"Too high! (Attempt {attempt_count})")
         else:
             attempts_text = "attempt" if attempt_count == 1 else "attempts"
-            print(f"Correct! You won in {attempt_count} {attempts_text}")
+            print(f"Congratulations! You won in {attempt_count} {attempts_text}")
             break
 
 def main() -> NoReturn:
@@ -64,8 +64,8 @@ def main() -> NoReturn:
     try:
         while True:
             play_game()
-            play_again = str(input("\nPlay again? (Y/N): ")).strip().lower()
-            if play_again != "y":
+            play_again = get_yes_no_input("\nPlay again? (Y/N): ")
+            if not play_again:
                 print("Thanks for playing!")
                 break
     except (KeyboardInterrupt, EOFError):
