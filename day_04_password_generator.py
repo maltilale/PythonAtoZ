@@ -11,9 +11,10 @@
 import secrets
 import string
 
-LETTERS = string.ascii_letters          # a-zA-Z
-DIGITS = string.digits                 # 0-9
-SYMBOLS = "!@#$%^&*()-_=+[]{};:,.<>?/" # safe-ish symbol set (customizable)
+LETTERS = string.ascii_letters  # a-zA-Z
+DIGITS = string.digits  # 0-9
+SYMBOLS = "!@#$%^&*()-_=+[]{};:,.<>?/"  # safe-ish symbol set (customizable)
+
 
 def generate_password(n_letters: int, n_symbols: int, n_numbers: int) -> str:
     if min(n_letters, n_symbols, n_numbers) < 0:
@@ -24,8 +25,9 @@ def generate_password(n_letters: int, n_symbols: int, n_numbers: int) -> str:
     chars += [secrets.choice(SYMBOLS) for _ in range(n_symbols)]
     chars += [secrets.choice(DIGITS) for _ in range(n_numbers)]
 
-    secrets.SystemRandom().shuffle(chars) 
+    secrets.SystemRandom().shuffle(chars)
     return "".join(chars)
+
 
 if __name__ == "__main__":
     n_letters = int(input("Number of letters: "))

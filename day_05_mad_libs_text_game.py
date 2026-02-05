@@ -22,12 +22,14 @@ def mad_lib_game(place: str, adjective: str, noun: str, verb: str) -> str:
     if len(original_words) == len(unique_words):
         sentence = f"Today, I went to the {place} to buy a {adjective} {noun}. Then I decided to {verb} all the way home!"
         return sentence
-    
+
     return ""
-   
+
 
 if __name__ == "__main__":
-    print("Today, I went to the {place} to buy a {adjective} {noun}. Then I decided to {verb} all the way home!")
+    print(
+        "Today, I went to the {place} to buy a {adjective} {noun}. Then I decided to {verb} all the way home!"
+    )
     place_text = str(input("In above text, what will be the place? "))
     adjective_text = str(input("In above text, what will be the adjective? "))
     nounplace_text = str(input("In above text, what will be the noun? "))
@@ -35,7 +37,3 @@ if __name__ == "__main__":
 
     result = mad_lib_game(place_text, adjective_text, nounplace_text, verb_text)
     print(result)
-
-
-
-

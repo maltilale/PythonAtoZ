@@ -16,9 +16,10 @@ from typing import NoReturn
 MIN_NUMBER = 1
 MAX_NUMBER = 100
 
+
 def get_valid_guess_input(prompt: str, min_val: int, max_val: int) -> int:
     while True:
-        try: 
+        try:
             input_val = int(input(prompt))
             if min_val <= input_val <= max_val:
                 return input_val
@@ -30,24 +31,23 @@ def get_valid_guess_input(prompt: str, min_val: int, max_val: int) -> int:
             print("\nGame interrupted")
             raise
 
+
 def get_yes_no_input(prompt: str) -> bool:
     while True:
         response = input(prompt).strip().lower()
-        if response in ('y', 'yes'):
+        if response in ("y", "yes"):
             return True
-        if response in ('n', 'no'):
+        if response in ("n", "no"):
             return False
         print("Please enter 'Y' or 'N'.")
+
 
 def play_game() -> None:
     random_number = random.randint(MIN_NUMBER, MAX_NUMBER)
     attempt_count = 0
     print(f"Guess the number between {MIN_NUMBER} and {MAX_NUMBER}!")
     while True:
-        guess = get_valid_guess_input(
-            "Enter your guess: ",
-             MIN_NUMBER,
-              MAX_NUMBER)
+        guess = get_valid_guess_input("Enter your guess: ", MIN_NUMBER, MAX_NUMBER)
         attempt_count += 1
 
         if guess < random_number:
@@ -58,6 +58,7 @@ def play_game() -> None:
             attempts_text = "attempt" if attempt_count == 1 else "attempts"
             print(f"Congratulations! You won in {attempt_count} {attempts_text}")
             break
+
 
 def main() -> NoReturn:
     print("Welcome to the number guessing game!")
@@ -70,8 +71,9 @@ def main() -> NoReturn:
                 break
     except (KeyboardInterrupt, EOFError):
         print("\nThanks for playing!")
-    
+
     raise SystemExit(0)
+
 
 if __name__ == "__main__":
     main()

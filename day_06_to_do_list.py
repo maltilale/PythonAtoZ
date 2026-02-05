@@ -30,14 +30,17 @@
 
 from pydantic import BaseModel
 
+
 def valid_input():
     global task_description, task_id, file_name
     print("To create a to-do list, give below details: ")
     try:
-        task_description = str(input("Give task description with lenght not more then 200 characters: "))
+        task_description = str(
+            input("Give task description with lenght not more then 200 characters: ")
+        )
         task_id = int(input("Give task ID: "))
         file_name = str(input("Give file name to be saved with: "))
-        
+
     except ValueError as e:
         print(e)
         print("Invalid input! Please enter a valid input.")
@@ -46,13 +49,14 @@ def valid_input():
         todo.add_task(task_description, task_id, file_name)
         todo.view_tasks()
 
-       
+
 class Task(BaseModel):
     task_description: str
     task_id: int
     status: str
 
-class TodoList():
+
+class TodoList:
 
     def __init__(self):
         self.to_do_list = []
@@ -65,14 +69,13 @@ class TodoList():
 
     def view_tasks(self) -> list[Task]:
         return self.to_do_list
-    
+
     def complete_task(self, task_id: int):
         for task in self.to_do_list:
             if task.task_id == task_id:
                 task.status = "completed"
                 break
         self.view_tasks()
-            
 
     def delete_task(self, task_id: int):
         for index in range(len(self.to_do_list)):
@@ -83,7 +86,7 @@ class TodoList():
 
     def save_to_file(self, filename: str, task: Task):
         try:
-            with open(filename, 'w') as f:
+            with open(filename, "w") as f:
                 f.write(task.task_description)
             print(f"file saved successfully at: {filename}")
             self.load_from_file(filename)
@@ -94,7 +97,7 @@ class TodoList():
         try:
             with open(filename, "r", encoding="utf-8") as f:
                 return f.read()
-                
+
         except FileNotFoundError:
             print("The file was not found.")
         except IOError as e:

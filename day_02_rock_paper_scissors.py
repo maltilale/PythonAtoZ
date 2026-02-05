@@ -28,14 +28,18 @@ from typing import NoReturn
 OPTIONS = ["r", "p", "s"]
 LABELS = {"r": "rock", "p": "paper", "s": "scissors"}
 
+
 def get_user_choice(prompt: str) -> str:
     while True:
         response = input(prompt).strip().lower()
         if response in OPTIONS:
             return response
         else:
-            print("Invalid choice! Please select only one option from "
-            f"{', '.join(opt.upper() for opt in OPTIONS)}")
+            print(
+                "Invalid choice! Please select only one option from "
+                f"{', '.join(opt.upper() for opt in OPTIONS)}"
+            )
+
 
 def get_yes_no_input(prompt: str) -> bool:
     while True:
@@ -46,13 +50,16 @@ def get_yes_no_input(prompt: str) -> bool:
             return False
         print("Please enter 'Y' or 'N'.")
 
+
 def play_game() -> None:
     computer_choice = random.choice(OPTIONS)
     print(
         f"Decide an option between"
         f" Rock({OPTIONS[0]}), Paper({OPTIONS[1]}), Scissors({OPTIONS[2]})!"
     )
-    user_choice = get_user_choice(f"Please enter only 1 option from {", ".join(opt.upper() for opt in OPTIONS)}: ")
+    user_choice = get_user_choice(
+        f"Please enter only 1 option from {", ".join(opt.upper() for opt in OPTIONS)}: "
+    )
 
     user_choice_idx = OPTIONS.index(user_choice)
     computer_choice_idx = OPTIONS.index(computer_choice)
@@ -68,10 +75,11 @@ def play_game() -> None:
     else:
         print("Oops! Computer wins!!")
 
+
 def main() -> NoReturn:
-    print(f"-" * 60)
+    print("-" * 60)
     print("Welcome to the Rock - Paper - Scissor game!")
-    print(f"-" * 60)
+    print("-" * 60)
 
     try:
         while True:
@@ -82,8 +90,9 @@ def main() -> NoReturn:
                 break
     except (KeyboardInterrupt, EOFError):
         print("Thanks for playing!")
-    
+
     raise SystemExit(0)
+
 
 if __name__ == "__main__":
     main()
